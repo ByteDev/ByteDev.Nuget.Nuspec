@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Xml.Linq;
 
-namespace ByteDev.Nuget
+namespace ByteDev.Nuget.Factories
 {
     internal static class NuspecRepositoryFactory
     {

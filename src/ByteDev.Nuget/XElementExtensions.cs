@@ -48,5 +48,10 @@ namespace ByteDev.Nuget
                 .SingleOrDefault()?
                 .Value;
         }
+
+        public static string GetAttributeValue(this XElement source, string attributeName)
+        {
+            return source?.Attribute(attributeName)?.Value;
+        }
     }
 }

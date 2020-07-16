@@ -6,11 +6,11 @@ using NUnit.Framework;
 namespace ByteDev.Nuget.IntTests
 {
     [TestFixture]
-    public class NuspecFileTests
+    public class NuspecTests
     {
-        private static NuspecFile CreateSut(string filePath)
+        private static Nuspec CreateSut(string filePath)
         {
-            return NuspecFile.Load(filePath);
+            return Nuspec.Load(filePath);
         }
 
         [Test]
@@ -71,6 +71,29 @@ namespace ByteDev.Nuget.IntTests
             Assert.That(sut.MetaData.Tags, Is.Empty);
             Assert.That(sut.MetaData.Repository, Is.Null);
             Assert.That(sut.MetaData.Title, Is.Null);
+        }
+
+        [Test]
+        public void WhenFilesNotPresent_ThenSetToEmpty()
+        {
+            var sut = CreateSut(TestFiles.MandatoryOnly);
+
+            Assert.That(sut.Files, Is.Empty);
+        }
+
+        [Test]
+        public void WhenFilesPresent_ThenSetProperty()
+        {
+            var sut = CreateSut(TestFiles.Everything);
+
+            Assert.That(sut.Files.First().Src, Is.EqualTo(@"..\src\ByteDev.Nuget\bin\Release\netstandard2.0\ByteDev.Nuget.dll"));
+            Assert.That(sut.Files.First().Target, Is.EqualTo(@"lib\netstandard2.0"));
+
+            Assert.That(sut.Files.Second().Src, Is.EqualTo(@"..\images\icon.png"));
+            Assert.That(sut.Files.Second().Target, Is.EqualTo(@"images\"));
+
+            Assert.That(sut.Files.Third().Src, Is.EqualTo(@"..\LICENSE*"));
+            Assert.That(sut.Files.Third().Target, Is.Empty);
         }
     }
 }

@@ -102,9 +102,6 @@ namespace ByteDev.Nuget
         /// </summary>
         public string Title { get; set; }
 
-
-
-
         // licenseUrl - deprecated
         // iconUrl - deprecated
         // summary - deprecated (use description)
