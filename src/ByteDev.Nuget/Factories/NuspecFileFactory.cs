@@ -15,11 +15,17 @@ namespace ByteDev.Nuget.Factories
 
             IEnumerable<XElement> filesCollection = files.Elements().Where(e => e.Name.LocalName == "file");
 
-            return filesCollection.Select(f => new NuspecFile
+            return filesCollection.Select(CreateNuspecFile);
+        }
+
+        private static NuspecFile CreateNuspecFile(XElement file)
+        {
+            return new NuspecFile
             {
-                Src = f.GetAttributeValue("src"),
-                Target = f.GetAttributeValue("target")
-            });
+                Src = file.GetAttributeValue("src"),
+                Target = file.GetAttributeValue("target"),
+                Exclude = file.GetAttributeValue("exclude")
+            };
         }
     }
 }

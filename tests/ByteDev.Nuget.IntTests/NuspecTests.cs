@@ -112,12 +112,15 @@ namespace ByteDev.Nuget.IntTests
 
             Assert.That(sut.Files.First().Src, Is.EqualTo(@"..\src\ByteDev.Nuget\bin\Release\netstandard2.0\ByteDev.Nuget.dll"));
             Assert.That(sut.Files.First().Target, Is.EqualTo(@"lib\netstandard2.0"));
+            Assert.That(sut.Files.First().Exclude, Is.Null);
 
             Assert.That(sut.Files.Second().Src, Is.EqualTo(@"..\images\icon.png"));
             Assert.That(sut.Files.Second().Target, Is.EqualTo(@"images\"));
+            Assert.That(sut.Files.Second().Exclude, Is.Null);
 
-            Assert.That(sut.Files.Third().Src, Is.EqualTo(@"..\LICENSE*"));
-            Assert.That(sut.Files.Third().Target, Is.Empty);
+            Assert.That(sut.Files.Third().Src, Is.EqualTo(@"..\docs\*.*"));
+            Assert.That(sut.Files.Third().Target, Is.EqualTo(@"docs\"));
+            Assert.That(sut.Files.Third().Exclude, Is.EqualTo(@"..\docs\**\*.log"));
         }
     }
 }

@@ -31,6 +31,6 @@
   <files>
     <file src="..\src\ByteDev.Nuget\bin\Release\netstandard2.0\ByteDev.Nuget.dll" target="lib\netstandard2.0" />
     <file src="..\images\icon.png" target="images\" />
-    <file src="..\LICENSE*" target="" />
+    <file src="..\docs\*.*" target="docs\" exclude="..\docs\**\*.log" />
   </files>
 </package>
