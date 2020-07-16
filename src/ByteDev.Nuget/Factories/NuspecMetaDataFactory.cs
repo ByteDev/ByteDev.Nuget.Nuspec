@@ -13,6 +13,8 @@ namespace ByteDev.Nuget.Factories
 
             return new NuspecMetaData
             {
+                MinClientVersion = metaData.GetAttributeValue("minClientVersion"),
+
                 Id = metaData.GetChildElementValue("id"),
                 Version = metaData.GetChildElementValue("version"),
                 Description = metaData.GetChildElementValue("description"),

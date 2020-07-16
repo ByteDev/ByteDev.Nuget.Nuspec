@@ -5,27 +5,33 @@ namespace ByteDev.Nuget
 {
     public class NuspecMetaData
     {
+        /// <summary>
+        /// Specifies the minimum version of the NuGet client that can install this package, enforced
+        /// by nuget.exe and the Visual Studio Package Manager
+        /// </summary>
+        public string MinClientVersion { get; set; }
+
         #region Mandatory
 
         /// <summary>
-        /// The case-insensitive package identifier, which must be unique across nuget.org or whatever
+        /// Mandatory. The case-insensitive package identifier, which must be unique across nuget.org or whatever
         /// gallery the package resides in.
         /// </summary>
         public string Id { get; set; }
 
         /// <summary>
-        /// The version of the package, following the major.minor.patch pattern.
+        /// Mandatory. The version of the package, following the major.minor.patch pattern.
         /// Version numbers may include a pre-release suffix.
         /// </summary>
         public string Version { get; set; }
         
         /// <summary>
-        /// A description of the package for UI display.
+        /// Mandatory. A description of the package for UI display.
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        /// Collection of packages authors, matching the profile names on nuget.org.
+        /// Mandatory. Collection of packages authors, matching the profile names on nuget.org.
         /// </summary>
         public IEnumerable<string> Authors { get; set; }
 

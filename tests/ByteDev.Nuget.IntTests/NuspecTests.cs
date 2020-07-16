@@ -30,6 +30,7 @@ namespace ByteDev.Nuget.IntTests
         {
             var sut = CreateSut(TestFiles.Everything);
 
+            Assert.That(sut.MetaData.MinClientVersion, Is.EqualTo("100.0.0.1"));
             Assert.That(sut.MetaData.Owners.First(), Is.EqualTo("Donald Trump"));
             Assert.That(sut.MetaData.Owners.Second(), Is.EqualTo("Joe Biden"));
             Assert.That(sut.MetaData.ProjectUrl, Is.EqualTo(new Uri("https://github.com/ByteDev/ByteDev.Nuget")));
@@ -58,6 +59,7 @@ namespace ByteDev.Nuget.IntTests
         {
             var sut = CreateSut(TestFiles.MandatoryOnly);
 
+            Assert.That(sut.MetaData.MinClientVersion, Is.Null);
             Assert.That(sut.MetaData.Owners, Is.Empty);
             Assert.That(sut.MetaData.ProjectUrl, Is.Null);
             Assert.That(sut.MetaData.License, Is.Null);
