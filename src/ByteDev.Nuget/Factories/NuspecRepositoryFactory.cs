@@ -1,26 +1,22 @@
-﻿using System;
-using System.Linq;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
 
 namespace ByteDev.Nuget.Factories
 {
     internal static class NuspecRepositoryFactory
     {
-        public static NuspecRepository CreateRepository(XElement metaData)
+        public static NuspecRepository Create(XElement metaData)
         {
-            XElement repository = metaData.Descendants().SingleOrDefault(d => d.Name.LocalName == "repository");
+            XElement repository = metaData.GetChildElement("repository");
 
             if (repository == null)
                 return null;
 
-            XAttribute url = repository.Attribute("url");
-
             return new NuspecRepository
             {
-                Type = repository.Attribute("type")?.Value,
-                Url = url == null ? null : new Uri(url.Value),
-                Branch = repository.Attribute("branch")?.Value,
-                Commit = repository.Attribute("commit")?.Value
+                Type = repository.GetAttributeValue("type"),
+                Branch = repository.GetAttributeValue("branch"),
+                Commit = repository.GetAttributeValue("commit"),
+                Url = repository.GetAttributeUriValue("url")
             };
         }
     }

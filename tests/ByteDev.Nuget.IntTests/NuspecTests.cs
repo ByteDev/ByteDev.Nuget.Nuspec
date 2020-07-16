@@ -76,6 +76,28 @@ namespace ByteDev.Nuget.IntTests
         }
 
         [Test]
+        public void WhenMetaDataDependenciesNotPresent_ThenSetToEmpty()
+        {
+            var sut = CreateSut(TestFiles.MandatoryOnly);
+
+            Assert.That(sut.MetaData.Dependencies, Is.Null);
+        }
+
+        [Test]
+        public void WhenMetaDataDependenciesPresent_ThenSetProperty()
+        {
+            var sut = CreateSut(TestFiles.Everything);
+
+            var group = sut.MetaData.Dependencies.Groups.Single();
+
+            Assert.That(group.TargetFramework, Is.EqualTo(".NETStandard2.0"));
+            Assert.That(group.Dependencies.First().Id, Is.EqualTo("Microsoft.Extensions.Configuration"));
+            Assert.That(group.Dependencies.First().Version, Is.EqualTo("2.0.0"));
+            Assert.That(group.Dependencies.Second().Id, Is.EqualTo("Microsoft.Extensions.DependencyInjection"));
+            Assert.That(group.Dependencies.Second().Version, Is.EqualTo("3.0.0"));
+        }
+
+        [Test]
         public void WhenFilesNotPresent_ThenSetToEmpty()
         {
             var sut = CreateSut(TestFiles.MandatoryOnly);

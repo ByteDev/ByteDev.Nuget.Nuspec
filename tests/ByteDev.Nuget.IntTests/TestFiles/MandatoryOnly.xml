@@ -6,9 +6,5 @@
     <version>1.2.3</version>
     <description>.NET Standard library of nuget related functionality.</description>
     <authors>John Smith, Bob Smith</authors>
-
-    <dependencies>
-      <group targetFramework=".NETStandard2.0" />
-    </dependencies>
   </metadata>
 </package>

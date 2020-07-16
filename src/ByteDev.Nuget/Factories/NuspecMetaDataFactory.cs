@@ -31,8 +31,10 @@ namespace ByteDev.Nuget.Factories
                 Copyright = metaData.GetChildElementValue("copyright"),
                 Language = metaData.GetChildElementValue("language"),
                 Tags = metaData.GetChildElementValue("tags").ToCsv(' '),
-                Repository = NuspecRepositoryFactory.CreateRepository(metaData),
+                Repository = NuspecRepositoryFactory.Create(metaData),
                 Title = metaData.GetChildElementValue("title"),
+
+                Dependencies = NuspecDependenciesFactory.Create(metaData)
             };
         }
     }

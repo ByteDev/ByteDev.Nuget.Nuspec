@@ -108,6 +108,11 @@ namespace ByteDev.Nuget
         /// </summary>
         public string Title { get; set; }
 
+        /// <summary>
+        /// Package dependencies.
+        /// </summary>
+        public NuspecDependencies Dependencies { get; set; }
+        
         // licenseUrl - deprecated
         // iconUrl - deprecated
         // summary - deprecated (use description)

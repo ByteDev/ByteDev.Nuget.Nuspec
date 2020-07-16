@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
@@ -6,6 +7,11 @@ namespace ByteDev.Nuget
 {
     internal static class XElementExtensions
     {
+        public static IEnumerable<XElement> GetChildElements(this XElement source, string elementName)
+        {
+            return source?.Descendants().Where(d => d.Name.LocalName == elementName);
+        }
+
         public static XElement GetChildElement(this XElement source, string elementName)
         {
             return source?.Descendants().SingleOrDefault(d => d.Name.LocalName == elementName);
@@ -39,6 +45,7 @@ namespace ByteDev.Nuget
             return false;
         }
 
+
         public static string GetChildElementAttributeValue(this XElement source, string elementName, string attributeName)
         {
             XElement element = GetChildElement(source, elementName);
@@ -52,6 +59,16 @@ namespace ByteDev.Nuget
         public static string GetAttributeValue(this XElement source, string attributeName)
         {
             return source?.Attribute(attributeName)?.Value;
+        }
+
+        public static Uri GetAttributeUriValue(this XElement source, string attributeName)
+        {
+            var value = GetAttributeValue(source, attributeName);
+
+            if (string.IsNullOrEmpty(value))
+                return null;
+
+            return new Uri(value);
         }
     }
 }
