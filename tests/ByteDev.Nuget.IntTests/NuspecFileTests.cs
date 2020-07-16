@@ -1,0 +1,76 @@
+﻿using System;
+using System.Linq;
+using ByteDev.Collections;
+using NUnit.Framework;
+
+namespace ByteDev.Nuget.IntTests
+{
+    [TestFixture]
+    public class NuspecFileTests
+    {
+        private static NuspecFile CreateSut(string filePath)
+        {
+            return NuspecFile.Load(filePath);
+        }
+
+        [Test]
+        public void WhenMetaDataMandatoryExists_ThenSetProperties()
+        {
+            var sut = CreateSut(TestFiles.Everything);
+
+            Assert.That(sut.MetaData.Id, Is.EqualTo("TestId"));
+            Assert.That(sut.MetaData.Version, Is.EqualTo("1.2.3"));
+            Assert.That(sut.MetaData.Description, Is.EqualTo(".NET Standard library of nuget related functionality."));
+            Assert.That(sut.MetaData.Authors.First(), Is.EqualTo("John Smith"));
+            Assert.That(sut.MetaData.Authors.Second(), Is.EqualTo("Bob Smith"));
+        }
+
+        [Test]
+        public void WhenMetaDataOptionalExists_ThenSetProperties()
+        {
+            var sut = CreateSut(TestFiles.Everything);
+
+            Assert.That(sut.MetaData.Owners.First(), Is.EqualTo("Donald Trump"));
+            Assert.That(sut.MetaData.Owners.Second(), Is.EqualTo("Joe Biden"));
+            Assert.That(sut.MetaData.ProjectUrl, Is.EqualTo(new Uri("https://github.com/ByteDev/ByteDev.Nuget")));
+            Assert.That(sut.MetaData.License, Is.EqualTo("LICENSE"));
+            Assert.That(sut.MetaData.LicenseType, Is.EqualTo("file"));
+            Assert.That(sut.MetaData.Icon, Is.EqualTo(@"images\icon.png"));
+            Assert.That(sut.MetaData.RequireLicenseAcceptance, Is.True);
+            Assert.That(sut.MetaData.DevelopmentDependency, Is.True);
+            Assert.That(sut.MetaData.ReleaseNotes, Is.EqualTo("some release notes"));
+            Assert.That(sut.MetaData.Copyright, Is.EqualTo("Copyright 2020"));
+            Assert.That(sut.MetaData.Language, Is.EqualTo("en"));
+            Assert.That(sut.MetaData.Title, Is.EqualTo("TestTitle"));
+
+            Assert.That(sut.MetaData.Tags.First(), Is.EqualTo("nuget"));
+            Assert.That(sut.MetaData.Tags.Second(), Is.EqualTo("nuspec"));
+            Assert.That(sut.MetaData.Tags.Third(), Is.EqualTo("package"));
+            
+            Assert.That(sut.MetaData.Repository.Type, Is.EqualTo("git"));
+            Assert.That(sut.MetaData.Repository.Url, Is.EqualTo(new Uri("https://github.com/NuGet/NuGet.Client.git")));
+            Assert.That(sut.MetaData.Repository.Branch, Is.EqualTo("dev"));
+            Assert.That(sut.MetaData.Repository.Commit, Is.EqualTo("e1c65e4524cd70ee6e22abe33e6cb6ec73938cb3"));
+        }
+
+        [Test]
+        public void WhenMetaDataMandatoryOnly_ThenSetDefaults()
+        {
+            var sut = CreateSut(TestFiles.MandatoryOnly);
+
+            Assert.That(sut.MetaData.Owners, Is.Empty);
+            Assert.That(sut.MetaData.ProjectUrl, Is.Null);
+            Assert.That(sut.MetaData.License, Is.Null);
+            Assert.That(sut.MetaData.LicenseType, Is.Null);
+            Assert.That(sut.MetaData.Icon, Is.Null);
+            Assert.That(sut.MetaData.RequireLicenseAcceptance, Is.False);
+            Assert.That(sut.MetaData.DevelopmentDependency, Is.False);
+            Assert.That(sut.MetaData.ReleaseNotes, Is.Null);
+            Assert.That(sut.MetaData.Copyright, Is.Null);
+            Assert.That(sut.MetaData.Language, Is.Null);
+            Assert.That(sut.MetaData.Tags, Is.Empty);
+            Assert.That(sut.MetaData.Repository, Is.Null);
+            Assert.That(sut.MetaData.Title, Is.Null);
+        }
+    }
+}
