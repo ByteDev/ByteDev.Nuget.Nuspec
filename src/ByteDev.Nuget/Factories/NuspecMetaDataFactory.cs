@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using ByteDev.Strings;
 
 namespace ByteDev.Nuget.Factories
 {
@@ -18,7 +19,7 @@ namespace ByteDev.Nuget.Factories
                 Id = GetMandatoryMetaDataValue(metaData, "id"),
                 Version = GetMandatoryMetaDataValue(metaData, "version"),
                 Description = GetMandatoryMetaDataValue(metaData, "description"),
-                Authors = GetMandatoryMetaDataValue(metaData, "authors").ToCsv(),
+                Authors = GetMandatoryMetaDataValue(metaData, "authors").ToCsv(true),
 
                 ProjectUrl = metaData.GetChildElementValue("projectUrl").ToUri(),
                 License = metaData.GetChildElementValue("license"),
@@ -31,8 +32,8 @@ namespace ByteDev.Nuget.Factories
                 Language = metaData.GetChildElementValue("language"),
                 Title = metaData.GetChildElementValue("title"),
 
-                Owners = metaData.GetChildElementValue("owners").ToCsv(),
-                Tags = metaData.GetChildElementValue("tags").ToCsv(' '),
+                Owners = metaData.GetChildElementValue("owners").ToCsv(true),
+                Tags = metaData.GetChildElementValue("tags").ToCsv(' ', true),
 
                 Repository = NuspecRepositoryFactory.Create(metaData),
                 Dependencies = NuspecDependenciesFactory.Create(metaData),
