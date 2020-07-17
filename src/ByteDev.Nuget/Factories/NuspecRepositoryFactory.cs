@@ -16,7 +16,7 @@ namespace ByteDev.Nuget.Factories
                 Type = repository.GetAttributeValue("type"),
                 Branch = repository.GetAttributeValue("branch"),
                 Commit = repository.GetAttributeValue("commit"),
-                Url = repository.GetAttributeUriValue("url")
+                Url = repository.GetAttributeValue("url").ToUri()
             };
         }
     }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ByteDev.Nuget
@@ -18,6 +19,25 @@ namespace ByteDev.Nuget
             return source.Split(delimiter)
                 .Select(a => a.Trim())
                 .Where(s => s != string.Empty);
+        }
+
+        public static Uri ToUri(this string source)
+        {
+            if (string.IsNullOrEmpty(source))
+                return null;
+
+            return new Uri(source);
+        }
+
+        public static bool ToBool(this string source)
+        {
+            if (string.IsNullOrEmpty(source))
+                return false;
+
+            if (bool.TryParse(source, out bool result))
+                return result;
+
+            return false;
         }
     }
 }

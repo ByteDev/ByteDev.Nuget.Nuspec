@@ -9,12 +9,24 @@ namespace ByteDev.Nuget
     {
         public static IEnumerable<XElement> GetChildElements(this XElement source, string elementName)
         {
-            return source?.Descendants().Where(d => d.Name.LocalName == elementName);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            if (string.IsNullOrEmpty(elementName))
+                throw new ArgumentException("Element name was null or empty.", nameof(elementName));
+
+            return source.Descendants().Where(d => d.Name.LocalName == elementName);
         }
 
         public static XElement GetChildElement(this XElement source, string elementName)
         {
-            return source?.Descendants().SingleOrDefault(d => d.Name.LocalName == elementName);
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
+
+            if (string.IsNullOrEmpty(elementName))
+                throw new ArgumentException("Element name was null or empty.", nameof(elementName));
+
+            return source.Descendants().SingleOrDefault(d => d.Name.LocalName == elementName);
         }
 
         public static string GetChildElementValue(this XElement source, string elementName)
@@ -22,53 +34,15 @@ namespace ByteDev.Nuget
             return GetChildElement(source, elementName)?.Value;
         }
 
-        public static Uri GetChildElementUriValue(this XElement source, string elementName)
-        {
-            var value = GetChildElementValue(source, elementName);
-
-            if (string.IsNullOrEmpty(value))
-                return null;
-
-            return new Uri(value);
-        }
-
-        public static bool GetChildElementBoolValue(this XElement source, string elementName)
-        {
-            var value = GetChildElementValue(source, elementName);
-
-            if (string.IsNullOrEmpty(value))
-                return false;
-
-            if (bool.TryParse(value, out bool result))
-                return result;
-
-            return false;
-        }
-
-
-        public static string GetChildElementAttributeValue(this XElement source, string elementName, string attributeName)
-        {
-            XElement element = GetChildElement(source, elementName);
-
-            return element?
-                .Attributes(attributeName)
-                .SingleOrDefault()?
-                .Value;
-        }
-
         public static string GetAttributeValue(this XElement source, string attributeName)
         {
-            return source?.Attribute(attributeName)?.Value;
-        }
+            if (source == null)
+                throw new ArgumentNullException(nameof(source));
 
-        public static Uri GetAttributeUriValue(this XElement source, string attributeName)
-        {
-            var value = GetAttributeValue(source, attributeName);
+            if (string.IsNullOrEmpty(attributeName))
+                throw new ArgumentException("Attribute name was null or empty.", nameof(attributeName));
 
-            if (string.IsNullOrEmpty(value))
-                return null;
-
-            return new Uri(value);
+            return source.Attribute(attributeName)?.Value;
         }
     }
 }
