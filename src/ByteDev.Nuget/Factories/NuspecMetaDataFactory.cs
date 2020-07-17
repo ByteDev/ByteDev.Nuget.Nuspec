@@ -15,12 +15,11 @@ namespace ByteDev.Nuget.Factories
             {
                 MinClientVersion = metaData.GetAttributeValue("minClientVersion"),
 
-                Id = metaData.GetChildElementValue("id"),
-                Version = metaData.GetChildElementValue("version"),
-                Description = metaData.GetChildElementValue("description"),
-                Authors = metaData.GetChildElementValue("authors").ToCsv(),
+                Id = GetMandatoryMetaDataValue(metaData, "id"),
+                Version = GetMandatoryMetaDataValue(metaData, "version"),
+                Description = GetMandatoryMetaDataValue(metaData, "description"),
+                Authors = GetMandatoryMetaDataValue(metaData, "authors").ToCsv(),
 
-                Owners = metaData.GetChildElementValue("owners").ToCsv(),
                 ProjectUrl = metaData.GetChildElementUriValue("projectUrl"),
                 License = metaData.GetChildElementValue("license"),
                 LicenseType = metaData.GetChildElementAttributeValue("license", "type"),
@@ -30,12 +29,25 @@ namespace ByteDev.Nuget.Factories
                 ReleaseNotes = metaData.GetChildElementValue("releaseNotes"),
                 Copyright = metaData.GetChildElementValue("copyright"),
                 Language = metaData.GetChildElementValue("language"),
-                Tags = metaData.GetChildElementValue("tags").ToCsv(' '),
-                Repository = NuspecRepositoryFactory.Create(metaData),
                 Title = metaData.GetChildElementValue("title"),
 
-                Dependencies = NuspecDependenciesFactory.Create(metaData)
+                Owners = metaData.GetChildElementValue("owners").ToCsv(),
+                Tags = metaData.GetChildElementValue("tags").ToCsv(' '),
+
+                Repository = NuspecRepositoryFactory.Create(metaData),
+                Dependencies = NuspecDependenciesFactory.Create(metaData),
+                PackageTypes = NuspecPageTypesFactory.Create(metaData)
             };
+        }
+
+        private static string GetMandatoryMetaDataValue(XElement metaData, string elementName)
+        {
+            var value = metaData.GetChildElementValue(elementName);
+
+            if (value == null)
+                ExThrower.ThrowMissingElement(elementName);
+
+            return value;
         }
     }
 }

@@ -8,9 +8,28 @@ namespace ByteDev.Nuget.IntTests
     [TestFixture]
     public class NuspecTests
     {
-        private static Nuspec CreateSut(string filePath)
+        [Test]
+        public void WhenMissingMetaDataId_ThenThrowException()
         {
-            return Nuspec.Load(filePath);
+            Assert.Throws<InvalidNuspecException>(() => CreateSut(TestFiles.MissingId));
+        }
+
+        [Test]
+        public void WhenMissingMetaDataVersion_ThenThrowException()
+        {
+            Assert.Throws<InvalidNuspecException>(() => CreateSut(TestFiles.MissingVersion));
+        }
+
+        [Test]
+        public void WhenMissingMetaDataAuthors_ThenThrowException()
+        {
+            Assert.Throws<InvalidNuspecException>(() => CreateSut(TestFiles.MissingAuthors));
+        }
+
+        [Test]
+        public void WhenMissingMetaDataDescription_ThenThrowException()
+        {
+            Assert.Throws<InvalidNuspecException>(() => CreateSut(TestFiles.MissingDescription));
         }
 
         [Test]
@@ -121,6 +140,34 @@ namespace ByteDev.Nuget.IntTests
             Assert.That(sut.Files.Third().Src, Is.EqualTo(@"..\docs\*.*"));
             Assert.That(sut.Files.Third().Target, Is.EqualTo(@"docs\"));
             Assert.That(sut.Files.Third().Exclude, Is.EqualTo(@"..\docs\**\*.log"));
+        }
+
+        [Test]
+        public void WhenPackageTypesNotPresent_ThenSetToEmpty()
+        {
+            var sut = CreateSut(TestFiles.MandatoryOnly);
+
+            Assert.That(sut.MetaData.PackageTypes, Is.Empty);
+        }
+
+        [Test]
+        public void WhenPackageTypesPresent_ThenSetProperty()
+        {
+            var sut = CreateSut(TestFiles.Everything);
+
+            Assert.That(sut.MetaData.PackageTypes.First().Name, Is.EqualTo("Dependency"));
+            Assert.That(sut.MetaData.PackageTypes.First().Version, Is.Null);
+
+            Assert.That(sut.MetaData.PackageTypes.Second().Name, Is.EqualTo("DotnetTool"));
+            Assert.That(sut.MetaData.PackageTypes.Second().Version, Is.EqualTo("1.0.0"));
+
+            Assert.That(sut.MetaData.PackageTypes.Third().Name, Is.EqualTo("Template"));
+            Assert.That(sut.MetaData.PackageTypes.Third().Version, Is.EqualTo("1.0.0"));
+        }
+
+        private static Nuspec CreateSut(string filePath)
+        {
+            return Nuspec.Load(filePath);
         }
     }
 }

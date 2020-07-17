@@ -8,23 +8,23 @@ namespace ByteDev.Nuget.Factories
     {
         public static IEnumerable<NuspecFile> CreateFiles(XDocument xDoc)
         {
-            XElement files = xDoc.Root.GetChildElement("files");
+            XElement xFiles = xDoc.Root.GetChildElement("files");
 
-            if (files == null)
+            if (xFiles == null)
                 return Enumerable.Empty<NuspecFile>();
 
-            IEnumerable<XElement> filesCollection = files.Elements().Where(e => e.Name.LocalName == "file");
-
-            return filesCollection.Select(CreateNuspecFile);
+            return xFiles
+                .GetChildElements("file")
+                .Select(CreateNuspecFile);
         }
 
-        private static NuspecFile CreateNuspecFile(XElement file)
+        private static NuspecFile CreateNuspecFile(XElement xFile)
         {
             return new NuspecFile
             {
-                Src = file.GetAttributeValue("src"),
-                Target = file.GetAttributeValue("target"),
-                Exclude = file.GetAttributeValue("exclude")
+                Src = xFile.GetAttributeValue("src"),
+                Target = xFile.GetAttributeValue("target"),
+                Exclude = xFile.GetAttributeValue("exclude")
             };
         }
     }

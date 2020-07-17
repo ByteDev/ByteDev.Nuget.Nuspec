@@ -16,6 +16,21 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="TestFiles\MissingAuthors.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\MissingDescription.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\MissingVersion.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\MissingId.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\NoGroupDependencies.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestFiles\MandatoryOnly.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

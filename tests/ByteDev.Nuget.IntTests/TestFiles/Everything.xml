@@ -21,6 +21,12 @@
     <repository type="git" url="https://github.com/NuGet/NuGet.Client.git" branch="dev" commit="e1c65e4524cd70ee6e22abe33e6cb6ec73938cb3" />
     <title>TestTitle</title>
 
+    <packageTypes>
+      <packageType name="Dependency" />
+      <packageType name="DotnetTool" version="1.0.0" />
+      <packageType name="Template" version="1.0.0" />
+    </packageTypes>
+
     <dependencies>
       <group targetFramework=".NETStandard2.0">
         <dependency id="Microsoft.Extensions.Configuration" version="2.0.0" />

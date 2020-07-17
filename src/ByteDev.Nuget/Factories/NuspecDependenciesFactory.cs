@@ -17,26 +17,36 @@ namespace ByteDev.Nuget.Factories
 
             foreach (var xGroup in xGroups)
             {
-                var nuspecGroup = new NuspecDependencyGroup
-                {
-                    TargetFramework = xGroup.GetAttributeValue("targetFramework")
-                };
-
-                var xDependencys = xGroup.GetChildElements("dependency");
-
-                foreach (var xDependency in xDependencys)
-                {
-                    nuspecGroup.Dependencies.Add(new NuspecDependency
-                    {
-                        Id = xDependency.GetAttributeValue("id"),
-                        Version = xDependency.GetAttributeValue("version")
-                    });
-                }
-                
-                nuspecDependencies.Groups.Add(nuspecGroup);
+                nuspecDependencies.Groups.Add(CreateNuspecDependencyGroup(xGroup));
             }
             
             return nuspecDependencies;
+        }
+
+        private static NuspecDependencyGroup CreateNuspecDependencyGroup(XElement xGroup)
+        {
+            var nuspecGroup = new NuspecDependencyGroup
+            {
+                TargetFramework = xGroup.GetAttributeValue("targetFramework")
+            };
+
+            var xDependencys = xGroup.GetChildElements("dependency");
+
+            foreach (var xDependency in xDependencys)
+            {
+                nuspecGroup.Dependencies.Add(CreateNuspecDependency(xDependency));
+            }
+
+            return nuspecGroup;
+        }
+
+        private static NuspecDependency CreateNuspecDependency(XElement xDependency)
+        {
+            return new NuspecDependency
+            {
+                Id = xDependency.GetAttributeValue("id"),
+                Version = xDependency.GetAttributeValue("version")
+            };
         }
     }
 }
