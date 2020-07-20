@@ -19,7 +19,14 @@ namespace ByteDev.Nuget.Factories
             {
                 nuspecDependencies.Groups.Add(CreateNuspecDependencyGroup(xGroup));
             }
-            
+
+            var xNoGroupDependencies = metaData.GetChildElements("dependency");
+
+            foreach (var xDependency in xNoGroupDependencies)
+            {
+                nuspecDependencies.NoGroupDependencies.Add(CreateNuspecDependency(xDependency));
+            }
+
             return nuspecDependencies;
         }
 

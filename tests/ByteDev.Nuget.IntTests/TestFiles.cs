@@ -12,5 +12,7 @@
         public static readonly string MissingDescription = BasePath + "MissingDescription.xml";
         public static readonly string MissingId = BasePath + "MissingId.xml";
         public static readonly string MissingVersion = BasePath + "MissingVersion.xml";
+        
+        public static readonly string DependenciesNoGroups = BasePath + "DependenciesNoGroups.xml";
     }
 }

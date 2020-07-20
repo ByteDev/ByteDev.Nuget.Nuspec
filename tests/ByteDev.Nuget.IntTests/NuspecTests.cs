@@ -117,6 +117,20 @@ namespace ByteDev.Nuget.IntTests
         }
 
         [Test]
+        public void WhenMetaDataDependenciesAreNotInGroups_ThenSetProperty()
+        {
+            var sut = CreateSut(TestFiles.DependenciesNoGroups);
+
+            var noGroupDependencies = sut.MetaData.Dependencies.NoGroupDependencies;
+
+            Assert.That(noGroupDependencies.First().Id, Is.EqualTo("Newtonsoft.Json"));
+            Assert.That(noGroupDependencies.First().Version, Is.EqualTo("12.0.3"));
+
+            Assert.That(noGroupDependencies.Second().Id, Is.EqualTo("ByteDev.Collections"));
+            Assert.That(noGroupDependencies.Second().Version, Is.EqualTo("2.0.0"));
+        }
+
+        [Test]
         public void WhenFilesNotPresent_ThenSetToEmpty()
         {
             var sut = CreateSut(TestFiles.MandatoryOnly);

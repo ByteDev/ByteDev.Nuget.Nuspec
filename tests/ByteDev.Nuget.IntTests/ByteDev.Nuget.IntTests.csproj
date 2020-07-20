@@ -16,6 +16,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="TestFiles\DependenciesNoGroups.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="TestFiles\MissingAuthors.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
