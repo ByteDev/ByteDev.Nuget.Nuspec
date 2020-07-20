@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace ByteDev.Nuget.Nuspec
 {
+    /// <summary>
+    /// Represents metadata within the nuspec manifest.
+    /// </summary>
     public class NuspecMetaData
     {
         /// <summary>
@@ -122,34 +125,16 @@ namespace ByteDev.Nuget.Nuspec
         public IEnumerable<NuspecFrameworkAssembly> FrameworkAssemblies { get; internal set; }
 
         /// <summary>
-        /// Assebmly references. Used by projects using packages.config to explicitly specify the assemblies that
+        /// Assembly references. Used by projects using packages.config to explicitly specify the assemblies that
         /// the target project should reference when using the package.
         /// </summary>
         public NuspecReferences References { get; internal set; }
 
-        // licenseUrl - deprecated
-        // iconUrl - deprecated
-        // summary - deprecated (use description)
+        /// <summary>
+        /// Content files that define what files to include or exclude.
+        /// </summary>
+        public IEnumerable<NuspecContentFile> ContentFiles { get; internal set; }
 
         #endregion
-    }
-
-    public class NuspecReferences
-    {
-        public IEnumerable<NuspecReferenceGroup> Groups { get; internal set; }
-
-        public IEnumerable<NuspecReferenceFile> NoGroupFiles { get; internal set; }
-    }
-
-    public class NuspecReferenceGroup
-    {
-        public string TargetFramework { get; internal set; }
-
-        public IEnumerable<NuspecReferenceFile> Files { get; internal set; }
-    }
-
-    public class NuspecReferenceFile
-    {
-        public string FileName { get; internal set; }
     }
 }

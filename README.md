@@ -57,3 +57,12 @@ Example minimum valid nuspec XML manifest:
 </package>
 ```
 
+### Not supported elements
+
+The following `metadata` elements are not supported as they have now been deprecated:
+
+- `licenseUrl` (use `license` instead)
+- `iconUrl` (use `icon` instead)
+- `summary` (use `description` instead)
+
+If any exist in the nuspec manifest they will simply be ignored.

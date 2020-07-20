@@ -38,7 +38,8 @@ namespace ByteDev.Nuget.Nuspec.Factories
                 Dependencies = NuspecDependenciesFactory.Create(xMetaData),
                 PackageTypes = NuspecPageTypesFactory.Create(xMetaData),
                 FrameworkAssemblies = NuspecFrameworkAssembliesFactory.Create(xMetaData),
-                References = NuspecReferencesFactory.Create(xMetaData)
+                References = NuspecReferencesFactory.Create(xMetaData),
+                ContentFiles = NuspecContentFilesFactory.Create(xMetaData)
             };
         }
 
