@@ -5,7 +5,7 @@ using NUnit.Framework;
 namespace ByteDev.Nuget.Nuspec.UnitTests
 {
     [TestFixture]
-    public class NuspecTests
+    public class NuspecManifestTests
     {
         [TestFixture]
         public class Constructor

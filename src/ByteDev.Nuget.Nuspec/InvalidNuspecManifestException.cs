@@ -12,7 +12,7 @@ namespace ByteDev.Nuget.Nuspec
         /// <summary>
         /// Initializes a new instance of the <see cref="T:ByteDev.Nuget.NuspecException" /> class.
         /// </summary>
-        public InvalidNuspecManifestException() : base("Nuspec file is invalid.")
+        public InvalidNuspecManifestException() : base("Nuspec manifest file is invalid.")
         {
         }
 

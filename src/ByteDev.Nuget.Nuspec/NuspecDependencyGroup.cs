@@ -8,8 +8,6 @@ namespace ByteDev.Nuget.Nuspec
     /// </summary>
     public class NuspecDependencyGroup
     {
-        private IEnumerable<NuspecDependency> _dependencies;
-
         /// <summary>
         /// Target framework.
         /// </summary>
@@ -18,10 +16,6 @@ namespace ByteDev.Nuget.Nuspec
         /// <summary>
         /// Dependencies for the group.
         /// </summary>
-        public IEnumerable<NuspecDependency> Dependencies
-        {
-            get => _dependencies ?? (_dependencies = new List<NuspecDependency>());
-            internal set => _dependencies = value;
-        }
+        public IEnumerable<NuspecDependency> Dependencies { get; internal set; }
     }
 }

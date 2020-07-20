@@ -28,6 +28,7 @@ namespace ByteDev.Nuget.Nuspec
         /// </summary>
         /// <param name="xDoc">XML document of the nuspec file.</param>
         /// <exception cref="T:System.ArgumentNullException"><paramref name="xDoc" /> is null.</exception>
+        /// <exception cref="T:ByteDev.Nuget.Nuspec.InvalidNuspecManifestException">Nuspec manifest is invalid.</exception>
         public NuspecManifest(XDocument xDoc)
         {
             if (xDoc == null)
@@ -45,6 +46,7 @@ namespace ByteDev.Nuget.Nuspec
         /// </summary>
         /// <param name="nuspecFilePath">Nuspec file path.</param>
         /// <returns>New <see cref="T:ByteDev.Nuget.Nuspec" /> instance.</returns>
+        /// <exception cref="T:ByteDev.Nuget.Nuspec.InvalidNuspecManifestException">Nuspec manifest is invalid.</exception>
         public static NuspecManifest Load(string nuspecFilePath)
         {
             var doc = XDocument.Load(nuspecFilePath);
