@@ -33,6 +33,9 @@ namespace ByteDev.Nuget.Nuspec
             if (xDoc == null)
                 throw new ArgumentNullException(nameof(xDoc));
 
+            if (!xDoc.IsRootName("package"))
+                ExThrower.ThrowMissingRootElement();
+
             MetaData = NuspecMetaDataFactory.CreateMetaData(xDoc);
             Files = NuspecFileFactory.CreateFiles(xDoc);
         }
@@ -44,9 +47,9 @@ namespace ByteDev.Nuget.Nuspec
         /// <returns>New <see cref="T:ByteDev.Nuget.Nuspec" /> instance.</returns>
         public static NuspecManifest Load(string nuspecFilePath)
         {
-            var xDoc = XDocument.Load(nuspecFilePath);
+            var doc = XDocument.Load(nuspecFilePath);
 
-            return new NuspecManifest(xDoc);
+            return new NuspecManifest(doc);
         }
     }
 }

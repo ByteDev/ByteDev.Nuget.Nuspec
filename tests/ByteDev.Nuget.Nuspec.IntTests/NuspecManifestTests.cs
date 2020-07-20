@@ -11,25 +11,25 @@ namespace ByteDev.Nuget.Nuspec.IntTests
         [Test]
         public void WhenMissingMetaDataId_ThenThrowException()
         {
-            Assert.Throws<InvalidNuspecException>(() => CreateSut(TestFiles.MissingId));
+            Assert.Throws<InvalidNuspecManifestException>(() => CreateSut(TestFiles.MissingId));
         }
 
         [Test]
         public void WhenMissingMetaDataVersion_ThenThrowException()
         {
-            Assert.Throws<InvalidNuspecException>(() => CreateSut(TestFiles.MissingVersion));
+            Assert.Throws<InvalidNuspecManifestException>(() => CreateSut(TestFiles.MissingVersion));
         }
 
         [Test]
         public void WhenMissingMetaDataAuthors_ThenThrowException()
         {
-            Assert.Throws<InvalidNuspecException>(() => CreateSut(TestFiles.MissingAuthors));
+            Assert.Throws<InvalidNuspecManifestException>(() => CreateSut(TestFiles.MissingAuthors));
         }
 
         [Test]
         public void WhenMissingMetaDataDescription_ThenThrowException()
         {
-            Assert.Throws<InvalidNuspecException>(() => CreateSut(TestFiles.MissingDescription));
+            Assert.Throws<InvalidNuspecManifestException>(() => CreateSut(TestFiles.MissingDescription));
         }
 
         [Test]

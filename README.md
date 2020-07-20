@@ -24,3 +24,36 @@ Full details of the release notes can be viewed on [GitHub](https://github.com/B
 
 ## Usage
 
+The primary type in the ByteDev.Nuget.Nuspec package is `NuspecManifest`.  
+
+`NuspecManifest` can either be instantiated directly from an existing `XDocument` on it's constructor or by loading a nuspec file using the `Load` method.
+
+```csharp
+// Load a manifest from file
+NuspecManifest nuspec = NuspecManifest.Load(@"C:\MyProj\MyApp.nuspec");
+
+Console.WriteLine(nuspec.MetaData.Id);
+Console.WriteLine(nuspec.MetaData.Version);
+Console.WriteLine(nuspec.MetaData.Description);
+Console.WriteLine(nuspec.MetaData.Authors.First());
+Console.WriteLine(nuspec.Files.Count());
+```
+
+`NuspecManifest` will enforce the currently mandatory elements of a valid nuspec XML file. Upon any mandatory elements missing a `InvalidNuspecManifestException` will be thrown.
+
+As of writing the minimum valid nuspec XML manifest contains a root `package` element with `metadata` child element with `id`, `version`, `description` and `authors` child elements.
+
+Example minimum valid nuspec XML manifest:
+
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>MyTestPackage</id>
+    <version>1.0.0</version>
+    <description>My test package.</description>
+    <authors>John Smith, Bob Smith</authors>
+  </metadata>
+</package>
+```
+
