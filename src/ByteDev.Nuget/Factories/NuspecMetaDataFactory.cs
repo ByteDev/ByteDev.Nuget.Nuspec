@@ -7,43 +7,42 @@ namespace ByteDev.Nuget.Factories
     {
         public static NuspecMetaData CreateMetaData(XDocument xDoc)
         {
-            XElement metaData = xDoc.Root.GetChildElement("metadata");
+            XElement xMetaData = xDoc.Root.GetChildElement("metadata");
 
-            if (metaData == null) 
+            if (xMetaData == null) 
                 ExThrower.ThrowMissingElement("metadata");
 
             return new NuspecMetaData
             {
-                MinClientVersion = metaData.GetAttributeValue("minClientVersion"),
+                MinClientVersion = xMetaData.GetAttributeValue("minClientVersion"),
 
-                Id = GetMandatoryMetaDataValue(metaData, "id"),
-                Version = GetMandatoryMetaDataValue(metaData, "version"),
-                Description = GetMandatoryMetaDataValue(metaData, "description"),
-                Authors = GetMandatoryMetaDataValue(metaData, "authors").ToCsv(true),
+                Id = GetMandatoryMetaDataValue(xMetaData, "id"),
+                Version = GetMandatoryMetaDataValue(xMetaData, "version"),
+                Description = GetMandatoryMetaDataValue(xMetaData, "description"),
+                Authors = GetMandatoryMetaDataValue(xMetaData, "authors").ToCsv(true),
 
-                ProjectUrl = metaData.GetChildElementValue("projectUrl").ToUri(),
-                License = metaData.GetChildElementValue("license"),
-                LicenseType = metaData.GetChildElement("license")?.GetAttributeValue("type"),
-                Icon = metaData.GetChildElementValue("icon"),
-                RequireLicenseAcceptance = metaData.GetChildElementValue("requireLicenseAcceptance").ToBool(),
-                DevelopmentDependency = metaData.GetChildElementValue("developmentDependency").ToBool(),
-                ReleaseNotes = metaData.GetChildElementValue("releaseNotes"),
-                Copyright = metaData.GetChildElementValue("copyright"),
-                Language = metaData.GetChildElementValue("language"),
-                Title = metaData.GetChildElementValue("title"),
+                ProjectUrl = xMetaData.GetChildElementValue("projectUrl").ToUri(),
+                Icon = xMetaData.GetChildElementValue("icon"),
+                RequireLicenseAcceptance = xMetaData.GetChildElementValue("requireLicenseAcceptance").ToBool(),
+                DevelopmentDependency = xMetaData.GetChildElementValue("developmentDependency").ToBool(),
+                ReleaseNotes = xMetaData.GetChildElementValue("releaseNotes"),
+                Copyright = xMetaData.GetChildElementValue("copyright"),
+                Language = xMetaData.GetChildElementValue("language"),
+                Title = xMetaData.GetChildElementValue("title"),
 
-                Owners = metaData.GetChildElementValue("owners").ToCsv(true),
-                Tags = metaData.GetChildElementValue("tags").ToCsv(' ', true),
+                Owners = xMetaData.GetChildElementValue("owners").ToCsv(true),
+                Tags = xMetaData.GetChildElementValue("tags").ToCsv(' ', true),
 
-                Repository = NuspecRepositoryFactory.Create(metaData),
-                Dependencies = NuspecDependenciesFactory.Create(metaData),
-                PackageTypes = NuspecPageTypesFactory.Create(metaData)
+                License = NuspecLicenseFactory.Create(xMetaData),
+                Repository = NuspecRepositoryFactory.Create(xMetaData),
+                Dependencies = NuspecDependenciesFactory.Create(xMetaData),
+                PackageTypes = NuspecPageTypesFactory.Create(xMetaData)
             };
         }
 
-        private static string GetMandatoryMetaDataValue(XElement metaData, string elementName)
+        private static string GetMandatoryMetaDataValue(XElement xMetaData, string elementName)
         {
-            var value = metaData.GetChildElementValue(elementName);
+            var value = xMetaData.GetChildElementValue(elementName);
 
             if (value == null)
                 ExThrower.ThrowMissingElement(elementName);

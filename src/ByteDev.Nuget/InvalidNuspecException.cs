@@ -12,7 +12,7 @@ namespace ByteDev.Nuget
         /// <summary>
         /// Initializes a new instance of the <see cref="T:ByteDev.Nuget.NuspecException" /> class.
         /// </summary>
-        public InvalidNuspecException() : base("Error while handling a nuspec file.")
+        public InvalidNuspecException() : base("Nuspec file is invalid.")
         {
         }
 

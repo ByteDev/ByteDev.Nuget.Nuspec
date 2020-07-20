@@ -21,12 +21,12 @@ namespace ByteDev.Nuget
         /// <summary>
         /// List of include tags indicating of the dependency to include in the final package.
         /// </summary>
-        public IEnumerable<string> Include { get; internal set; }
+        public IEnumerable<string> IncludeTags { get; internal set; }
 
         /// <summary>
         /// List of exclude tags indicating of the dependency to include in the final package.
         /// </summary>
-        public IEnumerable<string> Exclude { get; internal set; }
+        public IEnumerable<string> ExcludeTags { get; internal set; }
 
         /*
         Possible tags:

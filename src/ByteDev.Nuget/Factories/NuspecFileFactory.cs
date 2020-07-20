@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using ByteDev.Strings;
 
 namespace ByteDev.Nuget.Factories
 {
@@ -24,7 +25,7 @@ namespace ByteDev.Nuget.Factories
             {
                 Src = xFile.GetAttributeValue("src"),
                 Target = xFile.GetAttributeValue("target"),
-                Exclude = xFile.GetAttributeValue("exclude")
+                ExcludeFiles = xFile.GetAttributeValue("exclude").ToCsv(';', true)
             };
         }
     }

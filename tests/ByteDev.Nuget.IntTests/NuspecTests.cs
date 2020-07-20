@@ -53,8 +53,8 @@ namespace ByteDev.Nuget.IntTests
             Assert.That(sut.MetaData.Owners.First(), Is.EqualTo("Donald Trump"));
             Assert.That(sut.MetaData.Owners.Second(), Is.EqualTo("Joe Biden"));
             Assert.That(sut.MetaData.ProjectUrl, Is.EqualTo(new Uri("https://github.com/ByteDev/ByteDev.Nuget")));
-            Assert.That(sut.MetaData.License, Is.EqualTo("LICENSE"));
-            Assert.That(sut.MetaData.LicenseType, Is.EqualTo("file"));
+            Assert.That(sut.MetaData.License.PathOrId, Is.EqualTo("LICENSE"));
+            Assert.That(sut.MetaData.License.Type, Is.EqualTo("file"));
             Assert.That(sut.MetaData.Icon, Is.EqualTo(@"images\icon.png"));
             Assert.That(sut.MetaData.RequireLicenseAcceptance, Is.True);
             Assert.That(sut.MetaData.DevelopmentDependency, Is.True);
@@ -82,7 +82,6 @@ namespace ByteDev.Nuget.IntTests
             Assert.That(sut.MetaData.Owners, Is.Empty);
             Assert.That(sut.MetaData.ProjectUrl, Is.Null);
             Assert.That(sut.MetaData.License, Is.Null);
-            Assert.That(sut.MetaData.LicenseType, Is.Null);
             Assert.That(sut.MetaData.Icon, Is.Null);
             Assert.That(sut.MetaData.RequireLicenseAcceptance, Is.False);
             Assert.That(sut.MetaData.DevelopmentDependency, Is.False);
@@ -113,10 +112,10 @@ namespace ByteDev.Nuget.IntTests
 
             Assert.That(group.Dependencies.First().Id, Is.EqualTo("Microsoft.Extensions.Configuration"));
             Assert.That(group.Dependencies.First().Version, Is.EqualTo("2.0.0"));
-            Assert.That(group.Dependencies.First().Include.First(), Is.EqualTo("contentFiles"));
-            Assert.That(group.Dependencies.First().Include.Second(), Is.EqualTo("runtime"));
-            Assert.That(group.Dependencies.First().Exclude.First(), Is.EqualTo("native"));
-            Assert.That(group.Dependencies.First().Exclude.Second(), Is.EqualTo("compile"));
+            Assert.That(group.Dependencies.First().IncludeTags.First(), Is.EqualTo("contentFiles"));
+            Assert.That(group.Dependencies.First().IncludeTags.Second(), Is.EqualTo("runtime"));
+            Assert.That(group.Dependencies.First().ExcludeTags.First(), Is.EqualTo("native"));
+            Assert.That(group.Dependencies.First().ExcludeTags.Second(), Is.EqualTo("compile"));
             
             Assert.That(group.Dependencies.Second().Id, Is.EqualTo("Microsoft.Extensions.DependencyInjection"));
             Assert.That(group.Dependencies.Second().Version, Is.EqualTo("3.0.0"));
@@ -151,15 +150,16 @@ namespace ByteDev.Nuget.IntTests
 
             Assert.That(sut.Files.First().Src, Is.EqualTo(@"..\src\ByteDev.Nuget\bin\Release\netstandard2.0\ByteDev.Nuget.dll"));
             Assert.That(sut.Files.First().Target, Is.EqualTo(@"lib\netstandard2.0"));
-            Assert.That(sut.Files.First().Exclude, Is.Null);
+            Assert.That(sut.Files.First().ExcludeFiles, Is.Empty);
 
             Assert.That(sut.Files.Second().Src, Is.EqualTo(@"..\images\icon.png"));
             Assert.That(sut.Files.Second().Target, Is.EqualTo(@"images\"));
-            Assert.That(sut.Files.Second().Exclude, Is.Null);
+            Assert.That(sut.Files.Second().ExcludeFiles, Is.Empty);
 
             Assert.That(sut.Files.Third().Src, Is.EqualTo(@"..\docs\*.*"));
             Assert.That(sut.Files.Third().Target, Is.EqualTo(@"docs\"));
-            Assert.That(sut.Files.Third().Exclude, Is.EqualTo(@"..\docs\**\*.log"));
+            Assert.That(sut.Files.Third().ExcludeFiles.First(), Is.EqualTo(@"..\docs\**\*.log"));
+            Assert.That(sut.Files.Third().ExcludeFiles.Second(), Is.EqualTo(@"..\docs\**\*.txt"));
         }
 
         [Test]

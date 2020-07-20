@@ -5,23 +5,23 @@ namespace ByteDev.Nuget.Factories
 {
     internal static class NuspecDependenciesFactory
     {
-        public static NuspecDependencies Create(XElement metaData)
+        public static NuspecDependencies Create(XElement xMetaData)
         {
-            var xDependencies = metaData.GetChildElement("dependencies");
+            var xDependencies = xMetaData.GetChildElement("dependencies");
 
             if (xDependencies == null)
                 return null;
 
             var nuspecDependencies = new NuspecDependencies();
 
-            var xGroups = metaData.GetChildElements("group");
+            var xGroups = xMetaData.GetChildElements("group");
 
             foreach (var xGroup in xGroups)
             {
                 nuspecDependencies.Groups.Add(CreateNuspecDependencyGroup(xGroup));
             }
 
-            var xNoGroupDependencies = metaData.GetChildElements("dependency");
+            var xNoGroupDependencies = xMetaData.GetChildElements("dependency");
 
             foreach (var xDependency in xNoGroupDependencies)
             {
@@ -54,8 +54,8 @@ namespace ByteDev.Nuget.Factories
             {
                 Id = xDependency.GetAttributeValue("id"),
                 Version = xDependency.GetAttributeValue("version"),
-                Include = xDependency.GetAttributeValue("include").ToCsv(true),
-                Exclude = xDependency.GetAttributeValue("exclude").ToCsv(true)
+                IncludeTags = xDependency.GetAttributeValue("include").ToCsv(true),
+                ExcludeTags = xDependency.GetAttributeValue("exclude").ToCsv(true)
             };
         }
     }

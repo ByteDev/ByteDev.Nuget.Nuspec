@@ -51,11 +51,9 @@ namespace ByteDev.Nuget
         public Uri ProjectUrl { get; internal set; }
 
         /// <summary>
-        /// License file path or SPDX license identifier.
+        /// License file.
         /// </summary>
-        public string License { get; internal set; }
-
-        public string LicenseType { get; internal set; }
+        public NuspecLicense License { get; internal set; }
 
         /// <summary>
         /// It is a path to an image file within the package, often shown in UIs like
