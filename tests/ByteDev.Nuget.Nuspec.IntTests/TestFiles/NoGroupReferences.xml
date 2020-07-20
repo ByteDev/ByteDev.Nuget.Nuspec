@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <!-- Mandatory -->
+    <id>TestId</id>
+    <version>1.2.3</version>
+    <description>.NET Standard library of nuget related functionality.</description>
+    <authors>John Smith, Bob Smith</authors>
+
+    <references>
+      <reference file="xunit.dll" />
+      <reference file="xunit.extensions.dll" />
+    </references>
+  </metadata>
+</package>

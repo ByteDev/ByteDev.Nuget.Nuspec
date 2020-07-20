@@ -3,8 +3,8 @@
 #tool "nuget:?package=GitVersion.CommandLine&version=5.2.4"
 #load "ByteDev.Utilities.cake"
 
-var solutionName = "ByteDev.Nuget";
-var projName = "ByteDev.Nuget";
+var solutionName = "ByteDev.Nuget.Nuspec";
+var projName = "ByteDev.Nuget.Nuspec";
 
 var solutionFilePath = "../" + solutionName + ".sln";
 var nuspecFilePath = projName + ".nuspec";

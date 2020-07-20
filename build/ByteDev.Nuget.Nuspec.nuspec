@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>ByteDev.Nuget.Nuspec</id>
+    <title>ByteDev.Nuget.Nuspec</title>
+    <version>0.0.1</version>
+    <authors>Paul Stanley</authors>
+    <owners>Paul Stanley</owners>
+    <copyright>Copyright 2020</copyright>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>.NET Standard library for reading nuget nuspec manifest files.</description>
+    <tags>nuspec nuget package dependency dependencies references xml</tags>
+    <projectUrl>https://github.com/ByteDev/ByteDev.Nuget.Nuspec</projectUrl>
+    <icon>images\icon.png</icon>
+    <license type="file">LICENSE</license>
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="ByteDev.Strings" version="4.1.0" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\src\ByteDev.Nuget.Nuspec\bin\Release\netstandard2.0\ByteDev.Nuget.Nuspec.dll" target="lib\netstandard2.0" />
+    <file src="..\src\ByteDev.Nuget.Nuspec\bin\Release\netstandard2.0\ByteDev.Nuget.Nuspec.xml" target="lib\netstandard2.0" />
+    <file src="..\images\icon.png" target="images\" />
+    <file src="..\LICENSE*" target="" />
+  </files>
+</package>
