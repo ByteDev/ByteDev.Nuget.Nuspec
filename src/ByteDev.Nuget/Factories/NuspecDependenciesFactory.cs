@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using ByteDev.Strings;
 
 namespace ByteDev.Nuget.Factories
 {
@@ -52,7 +53,9 @@ namespace ByteDev.Nuget.Factories
             return new NuspecDependency
             {
                 Id = xDependency.GetAttributeValue("id"),
-                Version = xDependency.GetAttributeValue("version")
+                Version = xDependency.GetAttributeValue("version"),
+                Include = xDependency.GetAttributeValue("include").ToCsv(true),
+                Exclude = xDependency.GetAttributeValue("exclude").ToCsv(true)
             };
         }
     }

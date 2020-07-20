@@ -110,8 +110,14 @@ namespace ByteDev.Nuget.IntTests
             var group = sut.MetaData.Dependencies.Groups.Single();
 
             Assert.That(group.TargetFramework, Is.EqualTo(".NETStandard2.0"));
+
             Assert.That(group.Dependencies.First().Id, Is.EqualTo("Microsoft.Extensions.Configuration"));
             Assert.That(group.Dependencies.First().Version, Is.EqualTo("2.0.0"));
+            Assert.That(group.Dependencies.First().Include.First(), Is.EqualTo("contentFiles"));
+            Assert.That(group.Dependencies.First().Include.Second(), Is.EqualTo("runtime"));
+            Assert.That(group.Dependencies.First().Exclude.First(), Is.EqualTo("native"));
+            Assert.That(group.Dependencies.First().Exclude.Second(), Is.EqualTo("compile"));
+            
             Assert.That(group.Dependencies.Second().Id, Is.EqualTo("Microsoft.Extensions.DependencyInjection"));
             Assert.That(group.Dependencies.Second().Version, Is.EqualTo("3.0.0"));
         }

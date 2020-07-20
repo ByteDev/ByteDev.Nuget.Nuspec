@@ -29,7 +29,7 @@
 
     <dependencies>
       <group targetFramework=".NETStandard2.0">
-        <dependency id="Microsoft.Extensions.Configuration" version="2.0.0" />
+        <dependency id="Microsoft.Extensions.Configuration" version="2.0.0" include="contentFiles, runtime" exclude="native, compile" />
         <dependency id="Microsoft.Extensions.DependencyInjection" version="3.0.0" />
       </group>
     </dependencies>
