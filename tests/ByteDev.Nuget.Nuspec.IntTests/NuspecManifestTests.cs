@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using ByteDev.Collections;
 using NUnit.Framework;
@@ -8,6 +9,12 @@ namespace ByteDev.Nuget.Nuspec.IntTests
     [TestFixture]
     public class NuspecManifestTests
     {
+        [Test]
+        public void WhenFileCannotBeFound_ThenThrowException()
+        {
+            Assert.Throws<FileNotFoundException>(() => CreateSut(@"C:\e4992b8d157a422ca1859133985def3f.nuspec"));
+        }
+
         #region Metadata
 
         [Test]

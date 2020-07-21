@@ -28,5 +28,15 @@ namespace ByteDev.Nuget.Nuspec.UnitTests
                 Assert.That(ex.Message, Is.EqualTo("Nuspec manifest is missing root element: 'package'."));
             }
         }
+
+        [TestFixture]
+        public class Load : NuspecManifestTests
+        {
+            [Test]
+            public void WhenPathIsNull_ThenThrowException()
+            {
+                Assert.Throws<ArgumentNullException>(() => NuspecManifest.Load(null));
+            }
+        }
     }
 }

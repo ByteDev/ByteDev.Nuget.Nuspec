@@ -46,6 +46,8 @@ namespace ByteDev.Nuget.Nuspec
         /// </summary>
         /// <param name="nuspecFilePath">Nuspec file path.</param>
         /// <returns>New <see cref="T:ByteDev.Nuget.Nuspec" /> instance.</returns>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="nuspecFilePath" /> is null.</exception>
+        /// <exception cref="T:System.IO.FileNotFoundException">Nuspec file does not exist.</exception>
         /// <exception cref="T:ByteDev.Nuget.Nuspec.InvalidNuspecManifestException">Nuspec manifest is invalid.</exception>
         public static NuspecManifest Load(string nuspecFilePath)
         {
