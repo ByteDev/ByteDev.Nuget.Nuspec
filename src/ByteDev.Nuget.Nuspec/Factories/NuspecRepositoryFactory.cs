@@ -1,5 +1,6 @@
 ﻿using System.Xml.Linq;
 using ByteDev.Strings;
+using ByteDev.Xml;
 
 namespace ByteDev.Nuget.Nuspec.Factories
 {

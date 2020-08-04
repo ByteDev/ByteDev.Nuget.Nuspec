@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="ByteDev.Strings" Version="4.1.0" />
+    <PackageReference Include="ByteDev.Xml" Version="1.0.0" />
   </ItemGroup>
 
 </Project>
