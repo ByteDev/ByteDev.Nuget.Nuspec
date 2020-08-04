@@ -1,4 +1,4 @@
-﻿namespace ByteDev.Nuget.Nuspec.PackageTests
+﻿namespace ByteDev.Nuget.Nuspec.NetCore.PackageTests
 {
     public static class TestFiles
     {

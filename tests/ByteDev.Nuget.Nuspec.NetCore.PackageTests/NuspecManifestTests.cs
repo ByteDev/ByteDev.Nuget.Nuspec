@@ -4,7 +4,7 @@ using System.Linq;
 using ByteDev.Collections;
 using NUnit.Framework;
 
-namespace ByteDev.Nuget.Nuspec.PackageTests
+namespace ByteDev.Nuget.Nuspec.NetCore.PackageTests
 {
     [TestFixture]
     public class NuspecManifestTests
